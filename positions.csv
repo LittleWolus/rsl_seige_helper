@@ -1,0 +1,19 @@
+position_id,condition1,condition2,condition3
+1,Magic,Legendary,Epic
+2,HP,Undead,Barbarian
+3,Shadowkin,Void,Corrupted
+4,Rare,Magic,Dark Elves
+5,Orc,Barbarian,Force
+6,Legendary,Telerian League,Def
+7,Legendary,Nyresan Union,Magic
+8,Def,Force,Sylvan Watcher
+9,Rare,Atk,Corrupted
+10,Rare,Lizardmen,Other
+11,Epic,Def,Nyresan Union
+12,Nyresan Union,Force,Corrupted
+13,Sacred order,Void,Rare
+14,Nyresan Union,Legendary,Def
+15,High Elves,Orc,Lizardmen
+16,Magic,Gaellen Pact,Other
+17,Nyresan Union,Support,Legendary
+18,Void,Atk,Shadowkin
