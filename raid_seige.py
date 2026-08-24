@@ -505,16 +505,46 @@ def compute_match_score(team: Team, position: Position, config: Dict) -> Optiona
     best_score = None
     best_position_condition = None
 
-    for original_condition, normalized_condition in zip(position.conditions, position.normalized_conditions):
-        if not condition_matches_team(normalized_condition, team.normalized_condition, config):
+    for original_condition, normalized_condition in zip(
+        position.conditions,
+        position.normalized_conditions
+    ):
+        if not condition_matches_team(
+            normalized_condition,
+            team.normalized_condition,
+            config
+        ):
             continue
 
-        restriction_weight = get_restriction_weight(normalized_condition, config)
+        restriction_weight = get_restriction_weight(
+            normalized_condition,
+            config
+        )
 
+        # Power-4 teams are the best teams in the clan.
+        #
+        # The very large POWER_4_BONUS makes the optimizer prioritize
+        # assigning as many power-4 teams as possible before considering
+        # power, restriction weight, or position priority.
+        POWER_4_BONUS = 1_000_000_000
+
+        power_4_bonus = (
+            POWER_4_BONUS
+            if team.power >= 4
+            else 0
+        )
+
+        # Secondary preference:
+        # power 3 > power 2 > power 1
+        power_score = team.power * 1_000_000
+
+        # Tertiary preferences:
+        # restriction weight > position priority
         score = (
-            restriction_weight * 1000
+            power_4_bonus
+            + power_score
+            + restriction_weight * 1_000
             + position.priority * 100
-            + team.power
         )
 
         if best_score is None or score > best_score:
